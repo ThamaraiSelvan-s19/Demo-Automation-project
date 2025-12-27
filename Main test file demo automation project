@@ -1,0 +1,276 @@
+package com.smartshop.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+
+import com.smartshop.base.BaseTest;
+
+public class Maintest extends BaseTest {
+
+	public static void main(String[] args) throws Throwable {
+		BaseTest bp = new BaseTest();
+		bp.setup();
+		bp.openurl();
+//----------------------------------------------register_page-------------------------------------
+		WebElement login_Button = findElementByXpath("//a[@href='/login']");
+		click(login_Button);
+
+		Boolean usersignupvisible = findElementByXpath("//h2[text()='New User Signup!']").isDisplayed();
+		if (usersignupvisible == true) {
+			System.out.println("the page is visble");
+			WebElement username = findElementByXpath("//input[@name='name']");
+			elementSendKeys(username, "rajini12345");
+
+			WebElement usermailid = findElementByXpath("//input[@data-qa='signup-email']");
+			elementSendKeys(usermailid, "gojo123456@gmail.com");
+
+			WebElement clk_signup = findElementByXpath("//button[@data-qa='signup-button']");
+			click(clk_signup);
+		} else {
+			System.out.println("the page is not visible");
+		}
+		WebElement gender_btn = findElementByid("id_gender1");
+		click(gender_btn);
+
+		WebElement password_input = findElementByXpath("//label[@for='password']/following::input[@type='password']");
+		elementSendKeys(password_input, "rajini@12345");
+
+		WebElement days_input = findElementByid("days");
+		bp.selectind(days_input, 8);
+
+		WebElement month_input = findElementByid("months");
+		bp.selectind(month_input, 8);
+
+		WebElement year_input = findElementByid("years");
+		bp.selectvalue(year_input, "2003");
+
+		WebElement chk_clk = findElementByXpath("//input[@name='optin']");
+		boolean ischkbox_visible = chk_clk.isDisplayed();
+		if (ischkbox_visible == true) {
+			jsclick(chk_clk);
+			System.out.println("clicked by js");
+		} else {
+			click(chk_clk);
+		}
+		Thread.sleep(300);
+		WebElement scroll1 = findElementByXpath("//b[text()='Address Information']");
+		scrollelementdown(scroll1);
+
+		WebElement fname = findElementByXpath("//label[@for='first_name']/following::input[@id='first_name']");
+		elementSendKeys(fname, "raj");
+
+		WebElement l_name = findElementByXpath("//label[@for='last_name']/following::input[@id='last_name']");
+		elementSendKeys(l_name, "bhuvanesh");
+
+		WebElement company_name = findElementByXpath("//label[@for='company']/following::input[@id='company']");
+		elementSendKeys(company_name, "muthu tools");
+
+		WebElement addr1 = findElementByXpath("//label[@for='address1']/following::input[@id='address1']");
+		elementSendKeys(addr1, "dubai 03,muthu streeet");
+
+		WebElement addr2 = findElementByXpath("//label[@for='address2']/following::input[@id='address2']");
+		elementSendKeys(addr2, "dubai 03,muthu colony");
+
+		WebElement scrollactivity = findElementByXpath("//label[@for='address2']");
+		scrollelementdown(scrollactivity);
+
+		WebElement state_input = findElementByXpath("//label[@for='state']/following::input[@id='state']");
+		elementSendKeys(state_input, "tamilnadu");
+
+		WebElement city_input = findElementByXpath("//label[@for='city']/following::input[@id='city']");
+		elementSendKeys(city_input, "chennai");
+
+		WebElement zipcode_input = findElementByXpath("//label[text()='Zipcode ']/following::input[@id='zipcode']");
+		elementSendKeys(zipcode_input, "600122");
+
+		WebElement mobile_no = findElementByXpath(
+				"//label[text()='Mobile Number ']/following::input[@id='mobile_number']");
+		scrollelementdown(mobile_no);
+		elementSendKeys(mobile_no, "7827327823");
+
+		WebElement clk_register_btn = findElementByXpath("//button[text()='Create Account']");
+		click(clk_register_btn);
+
+		boolean ensure_acc_created = findElementByXpath("//b[text()='Account Created!']").isDisplayed();
+		if (ensure_acc_created == true) {
+			System.out.println("the account is created successfully");
+		} else {
+			System.out.println("the account is not created ");
+		}
+		WebElement subscription_input = findElementByXpath("//input[@placeholder='Your email address']");
+		scrollelementdown(subscription_input);
+		elementSendKeys(subscription_input, "bhuvanesh123@gmail.com");
+		findElementByXpath("//button[@id='subscribe']").click();
+		boolean success_subs = findElementByXpath("//div[contains(text(),'successfully subscribed!')]").isDisplayed();
+		if (success_subs == true) {
+			System.out.println("successfully subscribed");
+		} else {
+			System.out.println("not subscribed");
+		}
+		WebElement clk_continue = findElementByXpath("//a[text()='Continue']");
+		click(clk_continue);
+
+		WebElement loginas_chk = findElementByXpath("//i[@class='fa fa-user']/parent::a");
+		boolean loggedin = loginas_chk.isDisplayed();
+		if (loggedin == true) {
+			System.out.println("user logged in as :" + loginas_chk.getText());
+		} else {
+			System.out.println("not yet loggin as");
+		}
+		WebElement click_logout = findElementByXpath("//a[@href='/logout']");
+		click(click_logout);
+//-------------------------------------------login activity---------------------------------------------   
+
+		Thread.sleep(3000);
+		boolean islogaccvisible = findElementByXpath("//h2[text()='Login to your account']").isDisplayed();
+		if (islogaccvisible == true) {
+			System.out.println("the login filed is visible so,the user is log with details");
+			WebElement userlogmailid = findElementByXpath("//input[@data-qa='login-email']");
+			elementSendKeys(userlogmailid, "gojo123456@gmail.com");
+			WebElement logpasswd = findElementByXpath("//input[@data-qa='login-password']");
+			elementSendKeys(logpasswd, "rajini@12345");
+			WebElement clk_login_btn = findElementByXpath("//button[@data-qa='login-button']");
+			click(clk_login_btn);
+		} else {
+			System.out.println("some error is in login field ");
+		}
+//----------------------------------product activity----------------------------------------------------			       
+
+		WebElement product_clk = findElementByXpath("//a[@href='/products']");
+		click(product_clk);
+		WebElement search_bar = findElementByid("search_product");
+		elementSendKeys(search_bar, "tshirts");
+		findElementByid("submit_search").click();
+		WebElement scrolldown3 = findElementByXpath("//h2[text()='Searched Products']");
+		scrollelementdown(scrolldown3);
+		clk_view_product(3);
+		spinbtn(2);
+		inside_add2cart();
+		continueshoping_btn();
+		bp.NavigateBack();
+		WebElement expand_men_opt = findElementByXpath("//a[@href='#Men']");
+		scrollelementdown(expand_men_opt);
+		click(expand_men_opt);
+		WebElement jeans_opt = findElementByXpath("//a[@href='/category_products/6']");
+		click(jeans_opt);
+		Thread.sleep(1000);
+		WebElement scroll5 = findElementByXpath("//h2[text()='Men - Jeans Products']");
+		scrollelementdown(scroll5);
+		clk_view_product(3);
+		spinbtn(1);
+		inside_add2cart();
+		continueshoping_btn();
+		bp.NavigateBack();
+		WebElement expand_women_opt = findElementByXpath("//a[@href='#Women']");
+		click(expand_women_opt);
+		WebElement saree_opt = findElementByXpath("//a[@href='/category_products/7']");
+		click(saree_opt);
+		Thread.sleep(400);
+		clk_view_product(2);
+		inside_add2cart();
+		continueshoping_btn();
+		bp.NavigateBack();
+		addToCartByIndex(5);
+		continueshoping_btn();
+		Thread.sleep(400);
+		WebElement expand_kids = findElementByXpath("//a[@href='#Kids']");
+		click(expand_kids);
+		WebElement dresses_opt = findElementByXpath("//a[@href='/category_products/4']");
+		click(dresses_opt);
+		WebElement scroll4 = findElementByXpath("//h2[text()='Brands']");
+		scrollelementdown(scroll4);
+		addToCartByIndex(7);
+		Thread.sleep(1000);
+		continueshoping_btn();
+		WebElement scroll6 = findElementByXpath("//h2[text()='Kids - Dress Products']");
+		scrollelementup(scroll6);
+		Thread.sleep(400);
+		clk_view_product(2);
+		spinbtn(2);
+		inside_add2cart();
+		Thread.sleep(1000);
+		continueshoping_btn();
+		Thread.sleep(400);
+//----------------------------------------product_review--------------------------------------------
+		WebElement rev_name = findElementByXpath("//input[@placeholder='Your Name']");
+		elementSendKeys(rev_name, "jully");
+		WebElement rev_email = findElementByXpath("//input[@placeholder='Email Address']");
+		elementSendKeys(rev_email, "jully12@gmail.com");
+		WebElement rev_description = findElementByXpath("//*[@placeholder='Add Review Here!']");
+		elementSendKeys(rev_description, "ahh vazhthukal vazhuthukal");
+		findElementByXpath("//button[@id='button-review']").click();
+		Thread.sleep(400);
+		boolean out_review_response = findElementByXpath("//span[contains(text(), 'Thank you for your review.')]")
+				.isDisplayed();
+		if (out_review_response == true) {
+			System.out.println("the review is successfully submited");
+		}
+//------------------------------------cart_option-----------------------------------------------------	     
+		Thread.sleep(400);
+		WebElement cart_clk = findElementByXpath("//a[text()=' Cart']");
+		click(cart_clk);
+		WebElement proceed2chkout = findElementByXpath("//a[@class='btn btn-default check_out']");
+		click(proceed2chkout);
+		Thread.sleep(400);
+		boolean total_amt = findElementByXpath("//b[text()='Total Amount']/following::p[@class='cart_total_price']")
+				.isDisplayed();
+		if (total_amt == true) {
+			WebElement out_total = findElementByXpath(
+					"//b[text()='Total Amount']/following::p[@class='cart_total_price']");
+			System.out.println("the total is :" + out_total.getText());
+			WebElement place_order_clk = findElementByXpath("//a[text()='Place Order']");
+			scrollelementdown(place_order_clk);
+			click(place_order_clk);
+		}
+//---------------------------------payment_option-----------------------------------------
+		Thread.sleep(400);
+		WebElement card_name = findElementByXpath("//input[@name='name_on_card']");
+		elementSendKeys(card_name, "CUB");
+		WebElement card_no = findElementByXpath("//input[@name='card_number']");
+		elementSendKeys(card_no, "1912200309");
+		findElementByXpath("//input[@placeholder='ex. 311']").sendKeys("234");
+		findElementByXpath("//input[@placeholder='MM']").sendKeys("12", Keys.TAB, "2007");
+		findElementByXpath("//button[text()='Pay and Confirm Order']").click();
+		boolean out_orderplaced = findElementByXpath("//b[text()='Order Placed!']").isDisplayed();
+		if (out_orderplaced == true) {
+			System.out.println("Congratulations! Your order has been confirmed");
+			WebElement download_invoice = findElementByXpath("//a[text()='Download Invoice']");
+			click(download_invoice);
+			WebElement clk_continue2 = findElementByXpath("//a[@data-qa='continue-button']");
+			click(clk_continue2);
+
+		}
+//-------------------------------------------contact_us-----------------------------------------------
+		WebElement clk_contact_us = findElementByXpath("//a[@href='/contact_us']");
+		click(clk_contact_us);
+		boolean is_visi_touch = findElementByXpath("//h2[text()='Get In Touch']").isDisplayed();
+		if (is_visi_touch == true) {
+			WebElement cont_name = findElementByXpath("//input[@placeholder='Name']");
+			elementSendKeys(cont_name, "ajith");
+			WebElement cont_email = findElementByXpath("//input[@placeholder='Email']");
+			elementSendKeys(cont_email, "ajith@gmail.com");
+			WebElement cont_subject = findElementByXpath("//input[@placeholder='Subject']");
+			elementSendKeys(cont_subject, "review about my purchasing experience");
+			WebElement cont_rev_msg = findElementByid("message");
+			elementSendKeys(cont_rev_msg, "it was a wonderfull experience i was never ever "
+					+ "experience in any other shopping app,keep rocking budddy");
+			uploadfile(findElementByname("upload_file"), "C:\\Users\\kanna\\Downloads\\invoice (7).txt");
+			findElementByname("submit").click();
+			Thread.sleep(1000);
+			alertaccept();
+		}
+		boolean cont_success_msg = findElementByXpath("(//div[contains(text(),'Success! Your details ')])[1]")
+				.isDisplayed();
+		if (cont_success_msg == true) {
+			System.out.println("pop msg--Success! Your details have been submitted successfully.");
+			WebElement go_back = findElementByXpath("//span[text()=' Home']");
+			click(go_back);
+			
+//--------------------------close the browser-------------------------------------------
+			
+		}
+		//click(click_logout);
+		bp.teardown();
+	}
+}
